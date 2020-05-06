@@ -1,7 +1,15 @@
-body {
+.list-group-item {
+    display: flex;
+}
+
+.overview-cell {
+
+}
+
+.overview-cell-status {
     text-align: center;
 }
 
-.welcome {
-    padding-top: 40vh;
+.interaction-menu {
+    margin-top: 25px;
 }
