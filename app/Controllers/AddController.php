@@ -11,8 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = htmlspecialchars(trim($_POST['name']));
     $email = $_POST['email'];
     $phoneNumber = $_POST['phonenumber'];
-    $rates = $_POST['rates'];
+    $rates = (int) $_POST['rates'];
     $creditPackages = $_POST['credit-packages'];
+    var_dump($rates);
+
 
 
     if ((!preg_match('/^[a-zA-Z]*$/', $name) && strlen($name) <= 50 && $name != '')) {
@@ -33,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-//    if (!in_array($creditPackages, $creditModel->getAllCreditPackages())) {
-//        $errors[] = $creditPackages;
-//    }
+    if ($creditPackages < 0 && $creditPackages > 40) {
+        $errors[] = $creditPackages;
+    }
 
     if (count($errors) != 0) {
         include('app/Controllers/AddCreditController.php');
