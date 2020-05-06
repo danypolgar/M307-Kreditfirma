@@ -30,14 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = $phoneNumber;
     }
 
-//    if (!is_numeric($rates) && $rates >= 10 && $rates < 0) {
-//        $errors[] = $rates;
-//    }
-//
-//
-//    if ($creditPackages < 0 && $creditPackages > 40) {
-//        $errors[] = $creditPackages;
-//    }
+    if (!is_numeric($rates) && $rates >= 10 && $rates < 0) {
+        $errors[] = $rates;
+    }
+
+
+    if ($creditPackages < 0 && $creditPackages > 40) {
+        $errors[] = $creditPackages;
+    }
 
     if (count($errors) != 0) {
         include('app/Controllers/AddCreditController.php');

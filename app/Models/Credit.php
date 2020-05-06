@@ -32,19 +32,12 @@ class Credit {
 
     public function getAllCurrentlyRunningRents()
     {
-        $statement = $this->pdo->prepare('SELECT * FROM credit_administration');
+        $statement = $this->pdo->prepare('SELECT * FROM credit_administration as credits INNER JOIN creditpackages as packages ON credits.fk_credit_pack = packages.id');
         $statement->execute();
         $results = $statement->fetchAll();
         $activeCredits = [];
-
         foreach ($results as $result) {
-            $date = DateTime::createFromFormat('Y-m-d H:i:s', $result['rent_date']);
-            $calculatedInterval = $result['amount_rates'] * 15;
-            $dateInterval = new DateInterval('P' . $calculatedInterval . 'D');
-            $date->add($dateInterval);
-            $dateTime = new DateTime();
-            $dateTime->format('Y-m-d H:i:s');
-            if ($dateTime < $date) {
+            if ($result["rent_status"] == 0) {
                 $activeCredits[] = $result;
             }
         }
