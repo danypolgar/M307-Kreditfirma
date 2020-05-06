@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Erfassen</title>
+    <title>Bearbeiten</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="public/css/app.css">
@@ -74,8 +74,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label id="label-rates" for="rates">Verleih-Status*</label>
-                    <select type="number" name="rates" class="form-control" required>
+                    <label id="label-status" for="status">Verleih-Status*</label>
+                    <select type="number" name="status" class="form-control" required>
                         <option value="1">ausgeliehen, innerhalb der Verleih-Frist(&#9728)</option>
                         <option value="2">ausgeliehen, ausserhalb der Verleih-Frist(&#9889)</option>
 
