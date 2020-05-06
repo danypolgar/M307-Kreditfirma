@@ -12,21 +12,22 @@ class Credit {
 
     public function __construct()
     {
-        $id = $_GET['id'];
+
         $this->pdo = connectToDatabase();
     }
 
 
-    public function addCredit() {
-        $statement = $this->pdo->prepare('INSERT INTO `credit_administration` (firstname, email, phonenumber, amount_rates, rent_date, fk_credit_pack) 
-        VALUES (:firstname, :email, :phonenumber, :amount_rates, :rent_status, :rent_date, :fk_credit_pack)');
-        $statement->bindparam(':firstname', $this->firstname, PDO::PARAM_STR);
-        $statement->bindparam(':email', $this->email, PDO::PARAM_STR);
-        $statement->bindparam(':phonenumber', $this->phonenumber, PDO::PARAM_STR);
-        $statement->bindparam(':amount_rates', $this->amount_rates, PDO::PARAM_INT);
-        $statement->bindparam(':rent_date', $this->rent_date, PDO::PARAM_STR);
-        $statement->bindparam(':fk_credit_pack', $this->fk_credit_pack, PDO::PARAM_INT);
-        $statement->execute();
+    public function addCredit($firstname, $email, $phonenumber, $amount_rates, $fk_credit_pack) {
+
+            $statement = $this->pdo->prepare('INSERT INTO `credit_administration` (firstname, email, phonenumber, amount_rates, fk_credit_pack) 
+        VALUES (:firstname, :email, :phonenumber, :amount_rates, :fk_credit_pack)');
+            $statement->bindparam(':firstname', $firstname, PDO::PARAM_STR);
+            $statement->bindparam(':email', $email, PDO::PARAM_STR);
+            $statement->bindparam(':phonenumber', $phonenumber, PDO::PARAM_STR);
+            $statement->bindparam(':amount_rates', $amount_rates, PDO::PARAM_INT);
+            $statement->bindparam(':fk_credit_pack', $fk_credit_pack, PDO::PARAM_INT);
+            $statement->execute();
+
     }
 
     public function updateTask() {
