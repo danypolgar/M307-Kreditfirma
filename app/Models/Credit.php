@@ -5,29 +5,29 @@ class Credit {
     public $firstname;
     public $email;
     public $phonenumber;
-    public $amountRates;
-    public $creditPack;
+    public $amount_rates;
+    public $rent_status;
+    public $rent_date;
+    public $fk_credit_pack;
 
     public function __construct()
     {
+
         $this->pdo = connectToDatabase();
     }
 
 
-    public function addCredit() {
-        var_dump($this->firstname);
-        var_dump($this->email);
-        var_dump($this->phonenumber);
-        var_dump($this->amountRates);
-        var_dump($this->creditPack);
-        $statement = $this->pdo->prepare('INSERT INTO credit_administration (firstname, email, phonenumber, amount_rates, fk_credit_pack) 
-                                                    VALUES (:firstname, :email, :phonenumber, :amount_rates, fk_credit_pack)');
-        $statement->bindParam(':firstname', $this->firstname);
-        $statement->bindParam(':email', $this->email);
-        $statement->bindParam(':phonenumber', $this->phonenumber);
-        $statement->bindParam(':amount_rates', $this->amountRates);
-        $statement->bindParam(':fk_credit_pack', $this->creditPack);
-        $statement->execute();
+    public function addCredit($firstname, $email, $phonenumber, $amount_rates, $fk_credit_pack) {
+
+            $statement = $this->pdo->prepare('INSERT INTO `credit_administration` (firstname, email, phonenumber, amount_rates, fk_credit_pack) 
+        VALUES (:firstname, :email, :phonenumber, :amount_rates, :fk_credit_pack)');
+            $statement->bindparam(':firstname', $firstname, PDO::PARAM_STR);
+            $statement->bindparam(':email', $email, PDO::PARAM_STR);
+            $statement->bindparam(':phonenumber', $phonenumber, PDO::PARAM_STR);
+            $statement->bindparam(':amount_rates', $amount_rates, PDO::PARAM_INT);
+            $statement->bindparam(':fk_credit_pack', $fk_credit_pack, PDO::PARAM_INT);
+            $statement->execute();
+
     }
 
     public function getAllCurrentlyRunningRents ()

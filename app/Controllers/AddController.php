@@ -11,10 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = htmlspecialchars(trim($_POST['name']));
     $email = $_POST['email'];
     $phoneNumber = $_POST['phonenumber'];
-    $rates = $_POST['rates'];
-    $creditPackages = $_POST['credit-packages'];
+    $rates = 1;
+    $creditPackages = 1;
+    $creditModel->addCredit($name, $email, $phoneNumber, $rates, $creditPackages);
 
-    if (!(!preg_match('/[^a-zA-Z]/', $name) && strlen($name) <= 50 && $name != '')) {
+    if (!(!preg_match('/^[a-zA-Z]$/', $name) && strlen($name) <= 50 && $name != '')) {
         $errors[] = $name;
     }
 
@@ -23,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // TODO: telefonnummer regex
-    if (!(strlen($phoneNumber) <= 15)) {
+    if (!(strlen($phoneNumber) <= 15) && !preg_match('/^([+]?[0-9]*)$/', $phoneNumber)) {
         $errors[] = $phoneNumber;
     }
 
