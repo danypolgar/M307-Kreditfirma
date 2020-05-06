@@ -11,9 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = htmlspecialchars(trim($_POST['name']));
     $email = $_POST['email'];
     $phoneNumber = $_POST['phonenumber'];
-    $rates = 1;
-    $creditPackages = 1;
-    $creditModel->addCredit($name, $email, $phoneNumber, $rates, $creditPackages);
+    $rates = $_POST['rates'];
+    $creditPackages = $_POST['credit-packages'];
+
 
     if (!(!preg_match('/^[a-zA-Z]$/', $name) && strlen($name) <= 50 && $name != '')) {
         $errors[] = $name;
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $creditModel->phonenumber = '654654654';
         $creditModel->amountRates = 5;
         $creditModel->creditPack = 1;
-        $creditModel->addCredit();
+        $creditModel->addCredit($name, $email, $phoneNumber, $rates, $creditPackages);
         header('Location: overview');
     }
 } else {
