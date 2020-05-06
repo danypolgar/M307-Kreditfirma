@@ -2,14 +2,24 @@
     display: flex;
 }
 
-.overview-cell {
-
-}
-
 .overview-cell-status {
     text-align: center;
 }
 
 .interaction-menu {
     margin-top: 25px;
+}
+
+.verticals {
+    display: flex;
+}
+
+.form-group {
+    width: 45%;
+    margin-right: 5%;
+}
+
+fieldset {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

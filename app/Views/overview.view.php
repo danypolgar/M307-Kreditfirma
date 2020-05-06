@@ -32,7 +32,7 @@
         </div>
 
 <!--        TODO: Action event handeln-->
-        <form action="">
+        <form action="erfassen">
             <div class="interaction-menu">
                 <input type="submit" class="btn btn-primary" value="Erfassen">
             </div>
