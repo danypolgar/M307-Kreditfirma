@@ -13,7 +13,7 @@
         <fieldset>
             <div class="verticals">
                 <div class="form-group">
-                    <label id="label-name" for="name">Name*</label>
+                    <label id="label-name" for="name">Nickname*</label>
                     <input type="text" name="name" class="form-control" required>
                 </div>
                 <div class="form-group">
