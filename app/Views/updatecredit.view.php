@@ -9,7 +9,7 @@
 <div class="col-md-6 offset-3">
     <!--    TODO: Action und method handeln-->
     <form action="add" method="POST">
-        <h1>Kredite Erfassen</h1>
+        <h1>Kredite Bearbeiten</h1>
         <fieldset>
             <div class="verticals">
                 <div class="form-group">
@@ -28,21 +28,6 @@
         </fieldset>
         <fieldset>
             <div class="verticals">
-                <div class="form-group">
-                    <label id="label-rates" for="rates">Anzahl Raten*</label>
-                    <select type="number" name="rates" class="form-control" required>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                </div>
                 <div class="form-group">
                     <label id="label-credit-package" for="credit-packages">Kredit-Paket*</label>
                     <select class="form-control" name="credit-packages" required>
@@ -86,6 +71,14 @@
                         <option value="38">Kredit Karma: 8k</option>
                         <option value="39">Kredit Karma: 9k</option>
                         <option value="40">Kredit Karma: 10k</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label id="label-rates" for="rates">Verleih-Status*</label>
+                    <select type="number" name="rates" class="form-control" required>
+                        <option value="1">ausgeliehen, innerhalb der Verleih-Frist(&#9728)</option>
+                        <option value="2">ausgeliehen, ausserhalb der Verleih-Frist(&#9889)</option>
+
                     </select>
                 </div>
             </div>

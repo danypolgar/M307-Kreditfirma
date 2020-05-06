@@ -13,7 +13,7 @@ class Credit {
     {
         $this->pdo = connectToDatabase();
     }
-    
+
 
     public function addCredit() {
         var_dump($this->firstname);
