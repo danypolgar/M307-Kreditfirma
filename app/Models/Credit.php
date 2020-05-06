@@ -2,7 +2,7 @@
 
 class Credit {
     public $id;
-    public $firstname;
+    public $nickname;
     public $email;
     public $phonenumber;
     public $amount_rates;
@@ -17,11 +17,11 @@ class Credit {
     }
 
 
-    public function addCredit($firstname, $email, $phonenumber, $amount_rates, $fk_credit_pack) {
+    public function addCredit($nickname, $email, $phonenumber, $amount_rates, $fk_credit_pack) {
 
-            $statement = $this->pdo->prepare('INSERT INTO `credit_administration` (firstname, email, phonenumber, amount_rates, fk_credit_pack) 
-        VALUES (:firstname, :email, :phonenumber, :amount_rates, :fk_credit_pack)');
-            $statement->bindparam(':firstname', $firstname, PDO::PARAM_STR);
+            $statement = $this->pdo->prepare('INSERT INTO `credit_administration` (nickname, email, phonenumber, amount_rates, fk_credit_pack) 
+        VALUES (:nickname, :email, :phonenumber, :amount_rates, :fk_credit_pack)');
+            $statement->bindparam(':nickname', $nickname, PDO::PARAM_STR);
             $statement->bindparam(':email', $email, PDO::PARAM_STR);
             $statement->bindparam(':phonenumber', $phonenumber, PDO::PARAM_STR);
             $statement->bindparam(':amount_rates', $amount_rates, PDO::PARAM_INT);
@@ -47,13 +47,13 @@ class Credit {
     public function updateTask() {
 
         $statement = $this->pdo->prepare('UPDATE `credit_administration` 
-        SET firstname = :firstname, 
+        SET nickname = :nickname, 
             email = :email, 
             phonenumber = :phonenumber, 
             rent_status = :rent_status, 
             fk_credit_pack = :fk_credit_pack 
             WHERE id = :id');
-        $statement->bindParam(':firstname', $this->firstname);
+        $statement->bindParam(':firstname', $this->nickname);
         $statement->bindParam(':email', $this->email);
         $statement->bindParam(':phonenumber', $this->phonenumber);
         $statement->bindParam(':fk_credit_pack', $this->creditPack);
@@ -66,5 +66,27 @@ class Credit {
         $statement->execute();
         $statement = $statement->fetchAll();
         return $statement;
+    }
+    public function validateName($nickname) {
+        if (!preg_match('/^[a-zA-Z]{1,50}$/', $nickname)) {
+            return true;
+        }
+
+
+    }
+
+    public function validateEmail($email) {
+        if (!(stripos($email, '@') && strlen($email) <= 70 && $email != '')) {
+            return true;
+        }
+
+
+
+    }
+
+    public function validatePhoneNumber($phoneNumber) {
+        if (!preg_match('/^[0-9\-\(\)\/\+\s]{1,15}$/', $phoneNumber)) {
+            return true;
+        }
     }
 }

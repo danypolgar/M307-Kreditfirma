@@ -8,7 +8,7 @@ $creditModel = new Credit();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $name = htmlspecialchars(trim($_POST['name']));
+    $nickname = htmlspecialchars(trim($_POST['name']));
     $email = $_POST['email'];
     $phoneNumber = $_POST['phonenumber'];
     $rates = (int) $_POST['rates'];
@@ -17,16 +17,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-    if (!(!preg_match('/^[a-zA-Z]$/', $name) && strlen($name) <= 50 && $name != '')) {
-        $errors[] = $name;
+    if ($creditModel->validateName($nickname)) {
+        $errors[] = $nickname;
     }
 
-    if (!(stripos($email, '@') && strlen($email) <= 70 && $email != '')) {
+    if ($creditModel->validateEmail($email)) {
         $errors[] = $email;
     }
 
-    // TODO: telefonnummer regex
-    if (!(strlen($phoneNumber) <= 15) && !preg_match('/^([+]?[0-9]*)$/', $phoneNumber)) {
+
+    if ($creditModel->validatePhoneNumber($phoneNumber)) {
         $errors[] = $phoneNumber;
     }
 
@@ -45,12 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<div class='col-md-6 offset-3 alert alert-danger'>" . "$error" . "</div>";
         }
     } else {
-        $creditModel->firstname = 'Philip';
+        $creditModel->nickname = 'Philip';
         $creditModel->email = 'philip.baumann@sluz.ch';
         $creditModel->phonenumber = '654654654';
         $creditModel->amountRates = 5;
         $creditModel->creditPack = 1;
-        $creditModel->addCredit($name, $email, $phoneNumber, $rates, $creditPackages);
+        $creditModel->addCredit($nickname, $email, $phoneNumber, $rates, $creditPackages);
+        header('Location: overview');
     }
 } else {
     $errors[] = 'error has occured';
