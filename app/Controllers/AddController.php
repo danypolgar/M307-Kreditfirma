@@ -51,7 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $creditModel->amountRates = 5;
         $creditModel->creditPack = 1;
         $creditModel->addCredit($name, $email, $phoneNumber, $rates, $creditPackages);
-        header('Location: overview');
     }
 } else {
     $errors[] = 'error has occured';
