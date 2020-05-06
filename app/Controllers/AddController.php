@@ -1,5 +1,10 @@
 <?php
+
+require('app/Models/Credit.php');
+
+
 $errors = [];
+$creditModel = new Credit();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -26,17 +31,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = $rates;
     }
 
-    if ()
 
+//    if (!in_array($creditPackages, $creditModel->getAllCreditPackages())) {
+//        $errors[] = $creditPackages;
+//    }
 
-
-
-    var_dump($_POST);
+    if (count($errors) != 0) {
+        include('app/Controllers/AddCreditController.php');
+        foreach ($errors as $error) {
+            echo "<div class='col-md-6 offset-3 alert alert-danger'>" . "$error" . "</div>";
+        }
+    } else {
+        $creditModel->firstname = $name;
+        $creditModel->email = $email;
+        $creditModel->phonenumber = $phoneNumber;
+        $creditModel->amountRates = (int) $rates;
+        $creditModel->creditPack = 1;
+        $creditModel->addCredit();
+        header('Location: overview');
+    }
+} else {
+    $errors[] = 'error has occured';
 }
 
-include('app/Controllers/AddCreditController.php');
-foreach ($errors as $error) {
-    echo "<div class='col-md-6 offset-3 alert alert-danger'>" . "$error" . "</div>";
-}
+
 
 

@@ -5,39 +5,54 @@ class Credit {
     public $firstname;
     public $email;
     public $phonenumber;
-    public $amount_rates;
-    public $rent_status;
-    public $rent_date;
-    public $fk_credit_pack;
+    public $amountRates;
+    public $rentStatus;
+    public $creditPack;
 
     public function __construct()
     {
-        $id = $_GET['id'];
         $this->pdo = connectToDatabase();
     }
     
 
     public function addCredit() {
-        $statement = $this->pdo->prepare('INSERT INTO `credit_administration` (firstname, email, phonenumber, amount_rates, rent_date, fk_credit_pack) 
-        VALUES (:firstname, :email, :phonenumber, :amount_rates, :rent_status, :rent_date, :fk_credit_pack)');
-        $statement->bindparam(':firstname', $this->firstname, PDO::PARAM_STR);
-        $statement->bindparam(':email', $this->email, PDO::PARAM_STR);
-        $statement->bindparam(':phonenumber', $this->phonenumber, PDO::PARAM_STR);
-        $statement->bindparam(':amount_rates', $this->amount_rates, PDO::PARAM_INT);
-        $statement->bindparam(':rent_date', $this->rent_date, PDO::PARAM_STR);
-        $statement->bindparam(':fk_credit_pack', $this->fk_credit_pack, PDO::PARAM_INT);
+        var_dump($this->firstname);
+        var_dump($this->email);
+        var_dump($this->phonenumber);
+        var_dump($this->creditPack);
+        var_dump($this->amountRates);
+        $statement = $this->pdo->prepare('INSERT INTO credit_administration (firstname, email, phonenumber, amount_rates, rent_status, fk_credit_pack) 
+                                                    VALUES (:firstname, :email, :phonenumber, :amount_rates, :rent_status, fk_credit_pack)');
+        $statement->bindParam(':firstname', $this->firstname);
+        $statement->bindParam(':email', $this->email);
+        $statement->bindParam(':phonenumber', $this->phonenumber);
+        $statement->bindParam(':amount_rates', $this->amountRates);
+        $statement->bindParam(':rent_status', $this->rentStatus);
+        $statement->bindParam(':fk_credit_pack', $this->creditPack);
         $statement->execute();
     }
 
     public function updateTask() {
 
-        $statement = $this->pdo->prepare('UPDATE `credit_administration` SET firstname = :firstname, email = :email, phonenumber = :phonenumber, rent_status = :rent_status, fk_credit_pack = :fk_credit_pack WHERE id = :id');
-        $statement->bindParam(':firstname', $_POST['firstname']);
-        $statement->bindParam(':email', $_POST['email']);
-        $statement->bindParam(':phonenumber', $_POST['phonenumber']);
-        $statement->bindParam(':rent_status', $_POST['rent_status']);
-        $statement->bindParam(':fk_credit_pack', $_POST['fk_credit_pack']);
-        $statement->bindParam(':id', $id);
+        $statement = $this->pdo->prepare('UPDATE `credit_administration` 
+        SET firstname = :firstname, 
+            email = :email, 
+            phonenumber = :phonenumber, 
+            rent_status = :rent_status, 
+            fk_credit_pack = :fk_credit_pack 
+            WHERE id = :id');
+        $statement->bindParam(':firstname', $this->firstname);
+        $statement->bindParam(':email', $this->email);
+        $statement->bindParam(':phonenumber', $this->phonenumber);
+        $statement->bindParam(':fk_credit_pack', $this->creditPack);
+        $statement->bindParam(':id', $this->id);
         $statement->execute();
+    }
+
+    public function getAllCreditPackages() {
+        $statement = $this->pdo->prepare('SELECT * FROM `creditpackages`');
+        $statement->execute();
+        $statement = $statement->fetchAll();
+        return $statement;
     }
 }
