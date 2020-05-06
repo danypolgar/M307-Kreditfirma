@@ -15,7 +15,7 @@ class Credit {
         $id = $_GET['id'];
         $this->pdo = connectToDatabase();
     }
-    
+
 
     public function addCredit() {
         $statement = $this->pdo->prepare('INSERT INTO `credit_administration` (firstname, email, phonenumber, amount_rates, rent_date, fk_credit_pack) 
