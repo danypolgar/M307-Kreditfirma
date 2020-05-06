@@ -1,7 +1,11 @@
 <?php
+
+require('app/Models/Credit.php');
+
+
 $errors = [];
-require 'app/Models/Credit.php';
- $c = new Credit();
+$creditModel = new Credit();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $name = htmlspecialchars(trim($_POST['name']));
@@ -9,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phoneNumber = $_POST['phonenumber'];
     $rates = 1;
     $creditPackages = 1;
-    $c->addCredit($name, $email, $phoneNumber, $rates, $creditPackages);
+    $creditModel->addCredit($name, $email, $phoneNumber, $rates, $creditPackages);
 
     if (!(!preg_match('/^[a-zA-Z]$/', $name) && strlen($name) <= 50 && $name != '')) {
         $errors[] = $name;
@@ -24,18 +28,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = $phoneNumber;
     }
 
+    if (!is_numeric($rates) && $rates >= 10 && $rates < 0) {
+        $errors[] = $rates;
+    }
 
 
+//    if (!in_array($creditPackages, $creditModel->getAllCreditPackages())) {
+//        $errors[] = $creditPackages;
+//    }
 
-
-
-
-    var_dump($_POST);
+    if (count($errors) != 0) {
+        include('app/Controllers/AddCreditController.php');
+        foreach ($errors as $error) {
+            echo "<div class='col-md-6 offset-3 alert alert-danger'>" . "$error" . "</div>";
+        }
+    } else {
+        $creditModel->firstname = 'Philip';
+        $creditModel->email = 'philip.baumann@sluz.ch';
+        $creditModel->phonenumber = '654654654';
+        $creditModel->amountRates = 5;
+        $creditModel->creditPack = 1;
+        $creditModel->addCredit();
+        header('Location: overview');
+    }
+} else {
+    $errors[] = 'error has occured';
 }
 
-include('app/Controllers/AddCreditController.php');
-foreach ($errors as $error) {
-    echo "<div class='col-md-6 offset-3 alert alert-danger'>" . "$error" . "</div>";
-}
+
 
 

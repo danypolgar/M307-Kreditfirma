@@ -32,13 +32,25 @@ class Credit {
 
     public function updateTask() {
 
-        $statement = $this->pdo->prepare('UPDATE `credit_administration` SET firstname = :firstname, email = :email, phonenumber = :phonenumber, rent_status = :rent_status, fk_credit_pack = :fk_credit_pack WHERE id = :id');
-        $statement->bindParam(':firstname', $_POST['firstname']);
-        $statement->bindParam(':email', $_POST['email']);
-        $statement->bindParam(':phonenumber', $_POST['phonenumber']);
-        $statement->bindParam(':rent_status', $_POST['rent_status']);
-        $statement->bindParam(':fk_credit_pack', $_POST['fk_credit_pack']);
-        $statement->bindParam(':id', $id);
+        $statement = $this->pdo->prepare('UPDATE `credit_administration` 
+        SET firstname = :firstname, 
+            email = :email, 
+            phonenumber = :phonenumber, 
+            rent_status = :rent_status, 
+            fk_credit_pack = :fk_credit_pack 
+            WHERE id = :id');
+        $statement->bindParam(':firstname', $this->firstname);
+        $statement->bindParam(':email', $this->email);
+        $statement->bindParam(':phonenumber', $this->phonenumber);
+        $statement->bindParam(':fk_credit_pack', $this->creditPack);
+        $statement->bindParam(':id', $this->id);
         $statement->execute();
+    }
+
+    public function getAllCreditPackages() {
+        $statement = $this->pdo->prepare('SELECT * FROM `creditpackages`');
+        $statement->execute();
+        $statement = $statement->fetchAll();
+        return $statement;
     }
 }
