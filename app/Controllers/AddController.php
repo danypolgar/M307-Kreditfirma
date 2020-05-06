@@ -33,9 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-//    if (!in_array($creditPackages, $creditModel->getAllCreditPackages())) {
-//        $errors[] = $creditPackages;
-//    }
+    if (!in_array($creditPackages, $creditModel->getAllCreditPackages())) {
+        $errors[] = $creditPackages;
+    }
 
     if (count($errors) != 0) {
         include('app/Controllers/AddCreditController.php');
