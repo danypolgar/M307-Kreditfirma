@@ -42,10 +42,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<div class='col-md-6 offset-3 alert alert-danger'>" . "$error" . "</div>";
         }
     } else {
-        $creditModel->firstname = $name;
-        $creditModel->email = $email;
-        $creditModel->phonenumber = $phoneNumber;
-        $creditModel->amountRates = (int) $rates;
+        $creditModel->firstname = 'Philip';
+        $creditModel->email = 'philip.baumann@sluz.ch';
+        $creditModel->phonenumber = '654654654';
+        $creditModel->amountRates = 5;
         $creditModel->creditPack = 1;
         $creditModel->addCredit();
         header('Location: overview');

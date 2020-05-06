@@ -6,7 +6,6 @@ class Credit {
     public $email;
     public $phonenumber;
     public $amountRates;
-    public $rentStatus;
     public $creditPack;
 
     public function __construct()
@@ -19,17 +18,28 @@ class Credit {
         var_dump($this->firstname);
         var_dump($this->email);
         var_dump($this->phonenumber);
-        var_dump($this->creditPack);
         var_dump($this->amountRates);
-        $statement = $this->pdo->prepare('INSERT INTO credit_administration (firstname, email, phonenumber, amount_rates, rent_status, fk_credit_pack) 
-                                                    VALUES (:firstname, :email, :phonenumber, :amount_rates, :rent_status, fk_credit_pack)');
+        var_dump($this->creditPack);
+        $statement = $this->pdo->prepare('INSERT INTO credit_administration (firstname, email, phonenumber, amount_rates, fk_credit_pack) 
+                                                    VALUES (:firstname, :email, :phonenumber, :amount_rates, fk_credit_pack)');
         $statement->bindParam(':firstname', $this->firstname);
         $statement->bindParam(':email', $this->email);
         $statement->bindParam(':phonenumber', $this->phonenumber);
         $statement->bindParam(':amount_rates', $this->amountRates);
-        $statement->bindParam(':rent_status', $this->rentStatus);
         $statement->bindParam(':fk_credit_pack', $this->creditPack);
         $statement->execute();
+    }
+
+    public function getAllCurrentlyRunningRents () {
+        $statement = $this->pdo->prepare('SELECT * FROM credit_administration');
+        $statement->execute();
+        $results = $statement->fetchAll();
+        $activeCredits = [];
+        var_dump($results);
+        foreach ($results as $result) {
+
+
+        }
     }
 
     public function updateTask() {
