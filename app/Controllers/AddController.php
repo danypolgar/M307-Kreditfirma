@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $creditPackages = $_POST['credit-packages'];
 
 
-    if (!(!preg_match('/^[a-zA-Z]$/', $name) && strlen($name) <= 50 && $name != '')) {
+    if ((!preg_match('/^[a-zA-Z]*$/', $name) && strlen($name) <= 50 && $name != '')) {
         $errors[] = $name;
     }
 
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // TODO: telefonnummer regex
-    if (!(strlen($phoneNumber) <= 15) && !preg_match('/^([+]?[0-9]*)$/', $phoneNumber)) {
+    if (!preg_match('/^[0-9\-\(\)\/\+\s]{1,15}$/', $phoneNumber)) {
         $errors[] = $phoneNumber;
     }
 
@@ -33,9 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-    if (!in_array($creditPackages, $creditModel->getAllCreditPackages())) {
-        $errors[] = $creditPackages;
-    }
+//    if (!in_array($creditPackages, $creditModel->getAllCreditPackages())) {
+//        $errors[] = $creditPackages;
+//    }
 
     if (count($errors) != 0) {
         include('app/Controllers/AddCreditController.php');
