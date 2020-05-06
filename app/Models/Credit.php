@@ -30,16 +30,25 @@ class Credit {
         $statement->execute();
     }
 
-    public function getAllCurrentlyRunningRents () {
+    public function getAllCurrentlyRunningRents ()
+    {
         $statement = $this->pdo->prepare('SELECT * FROM credit_administration');
         $statement->execute();
         $results = $statement->fetchAll();
         $activeCredits = [];
-        var_dump($results);
+
         foreach ($results as $result) {
-
-
+            $date = DateTime::createFromFormat('Y-m-d H:i:s', $result['rent_date']);
+            $calculatedInterval = $result['amount_rates'] * 15;
+            $dateInterval = new DateInterval('P' . $calculatedInterval . 'D');
+            $date->add($dateInterval);
+            $dateTime = new DateTime();
+            $dateTime->format('Y-m-d H:i:s');
+            if ($dateTime < $date) {
+                $activeCredits[] = $result;
+            }
         }
+        return $activeCredits;
     }
 
     public function updateTask() {
