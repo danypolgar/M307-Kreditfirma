@@ -27,7 +27,7 @@
                         <?= $credit['name'] ?>
                     </div>
                     <div class="col-md-1 overview-cell">
-                        &#128394
+                        <a href="<?= 'bearbeiten?id=' . $credit["id"]?>">&#128394</a>
                     </div>
                 </li>
             <?php endforeach; ?>
