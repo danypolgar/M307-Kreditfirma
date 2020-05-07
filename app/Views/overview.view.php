@@ -18,7 +18,7 @@
                             <?= $credit["nickname"] ?>
                         </div>
                         <div class="col-md-1 overview-cell-status">
-                            <?php echo evaluateState($credit["amount_rates"]) ?>
+                            <?php echo evaluateState($credit["amount_rates"], $credit["rent_date"]) ?>
                         </div>
                         <div class="col-md-3 overview-cell">
                             <?php $days = Calculations::calculateDays($credit["amount_rates"]);
