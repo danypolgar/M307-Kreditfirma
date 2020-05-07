@@ -1,10 +1,11 @@
 <?php
 
 require('app/Models/Credit.php');
+require('app/Controllers/Calculations.php');
 
 
 $errors = [];
-$creditModel = new Credit();
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -13,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phoneNumber = $_POST['phonenumber'];
     $rates = (int) $_POST['rates'];
     $creditPackages = $_POST['credit-packages'];
+    $creditModel = new Credit();
     var_dump($rates);
 
 
@@ -45,11 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<div class='col-md-6 offset-3 alert alert-danger'>" . "$error" . "</div>";
         }
     } else {
-        $creditModel->nickname = 'Philip';
-        $creditModel->email = 'philip.baumann@sluz.ch';
-        $creditModel->phonenumber = '654654654';
-        $creditModel->amountRates = 5;
-        $creditModel->creditPack = 1;
+
         $creditModel->addCredit($nickname, $email, $phoneNumber, $rates, $creditPackages);
         header('Location: overview');
     }

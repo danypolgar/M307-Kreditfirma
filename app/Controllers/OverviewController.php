@@ -1,11 +1,12 @@
 <?php
 include_once('app/Models/Credit.php');
+include('app/Controllers/Calculations.php');
 $creditModel = new Credit();
 $creditList = $creditModel->getAllCurrentlyRunningRents();
 
 
 function evaluateState ($date, $rates) {
-    $date = calculateDeadline($date, $rates);
+    $date = Calculations::calculateDeadline($date, $rates);
     $dateTime = new DateTime();
     $dateTime->format('Y-m-d H:i:s');
     if ($dateTime < $date) {
@@ -15,12 +16,6 @@ function evaluateState ($date, $rates) {
     }
 }
 
-function calculateDeadline($date, $rates) {
-    $date = DateTime::createFromFormat('Y-m-d H:i:s', $date);
-    $calculatedInterval = $rates * 15;
-    $dateInterval = new DateInterval('P' . $calculatedInterval . 'D');
-    $date->add($dateInterval);
-    return $date;
-}
+
 
 include("app/Views/overview.view.php");

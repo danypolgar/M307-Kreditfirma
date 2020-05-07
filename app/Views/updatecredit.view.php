@@ -25,6 +25,10 @@
                 <label id="label-phonenumber" for="phonenumber">Telefonnummer</label>
                 <input type="text" name="phonenumber" class="form-control" value="<?= $credit["phonenumber"] ?>">
             </div>
+            <div class="form-group">
+                <label id="raten">Raten</label>
+                <input type="text" value="<?= $credit["amount_rates"] ?>" class="form-control" disabled>
+            </div>
         </fieldset>
         <fieldset>
             <div class="verticals">

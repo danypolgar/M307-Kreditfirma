@@ -20,7 +20,7 @@
                         <?php echo evaluateState($credit["rent_date"], $credit["amount_rates"]) ?>
                     </div>
                     <div class="col-md-3 overview-cell">
-                        <?php $dateTime = calculateDeadline($credit["rent_date"], $credit["amount_rates"]);
+                        <?php $dateTime = Calculations::calculateDeadline($credit["rent_date"], $credit["amount_rates"]);
                         echo $dateTime->format('Y-m-d')?>
                     </div>
                     <div class="col-md-4 overview-cell">
