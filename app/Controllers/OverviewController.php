@@ -7,7 +7,7 @@ $creditList = $creditModel->getAllCurrentlyRunningRents();
 
 function evaluateState ($rates, $rentDate) {
 
-    
+
     $date = date('Y-m-d', strtotime($rentDate. ' + ' . Calculations::calculateDays($rates) . ' days'));
     if ($rentDate < $date) {
         return '&#9728';

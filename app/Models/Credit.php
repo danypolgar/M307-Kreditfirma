@@ -32,7 +32,7 @@ class Credit {
 
     public function getAllCurrentlyRunningRents()
     {
-        $statement = $this->pdo->prepare('SELECT * FROM credit_administration as credits INNER JOIN creditpackages as packages ON packages.id = credits.fk_credit_pack ORDER BY credits.rent_date');
+        $statement = $this->pdo->prepare('SELECT * FROM credit_administration as credits INNER JOIN creditpackages as packages ON packages.id = credits.fk_credit_pack ORDER BY DATE_ADD(credits.rent_date, INTERVAL credits.amount_rates * 15 DAY)');
         $statement->execute();
         $results = $statement->fetchAll();
         $activeCredits = [];
