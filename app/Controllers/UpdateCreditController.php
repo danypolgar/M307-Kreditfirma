@@ -1,6 +1,6 @@
 <?php
 
-include('app/Models/Credit.php');
+include_once('app/Models/Credit.php');
 $creditModel = new Credit();
 $creditPackages = $creditModel->getAllCreditPackages();
 $credit = null;

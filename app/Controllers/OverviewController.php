@@ -1,12 +1,10 @@
 <?php
-include_once('app/Models/Credit.php');
 include('app/Controllers/Calculations.php');
+include_once('app/Models/Credit.php');
 $creditModel = new Credit();
 $creditList = $creditModel->getAllCurrentlyRunningRents();
 
-
 function evaluateState ($rates) {
-
     $today = new DateTime();
     $today = $today->format('Y-m-d');
     $date = date('Y-m-d', strtotime($today. ' + ' . Calculations::calculateDays($rates) . ' days'));
@@ -16,7 +14,4 @@ function evaluateState ($rates) {
         return '&#9889';
     }
 }
-
-
-
 include("app/Views/overview.view.php");

@@ -1,5 +1,5 @@
 <?php
-include('app/Models/Credit.php');
+include_once('app/Models/Credit.php');
 
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $creditModel = new Credit();

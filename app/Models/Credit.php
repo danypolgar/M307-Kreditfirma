@@ -1,26 +1,16 @@
 <?php
 
 class Credit {
-    public $id;
-    public $nickname;
-    public $email;
-    public $phonenumber;
-    public $amount_rates;
-    public $rent_status;
-    public $rent_date;
-    public $fk_credit_pack;
-
     public function __construct()
     {
-
         $this->pdo = connectToDatabase();
     }
 
 
     public function addCredit($nickname, $email, $phonenumber, $amount_rates, $fk_credit_pack) {
-
-            $statement = $this->pdo->prepare('INSERT INTO `credit_administration` (nickname, email, phonenumber, amount_rates, fk_credit_pack) 
-        VALUES (:nickname, :email, :phonenumber, :amount_rates, :fk_credit_pack)');
+            $statement = $this->pdo->prepare('INSERT INTO `credit_administration`
+                                                        (nickname, email, phonenumber, amount_rates, fk_credit_pack) 
+                                                        VALUES (:nickname, :email, :phonenumber, :amount_rates, :fk_credit_pack)');
             $statement->bindparam(':nickname', $nickname, PDO::PARAM_STR);
             $statement->bindparam(':email', $email, PDO::PARAM_STR);
             $statement->bindparam(':phonenumber', $phonenumber, PDO::PARAM_STR);
@@ -32,7 +22,7 @@ class Credit {
 
     public function getAllCurrentlyRunningRents()
     {
-        $statement = $this->pdo->prepare('SELECT * FROM credit_administration as credits INNER JOIN creditpackages as packages ON packages.id = credits.fk_credit_pack ORDER BY credits.rent_date');
+        $statement = $this->pdo->prepare('SELECT * FROM credit_administration as credits INNER JOIN creditpackages as packages ON packages.id = credits.fk_credit_pack');
         $statement->execute();
         $results = $statement->fetchAll();
         $activeCredits = [];
