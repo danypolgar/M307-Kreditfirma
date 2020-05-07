@@ -69,6 +69,14 @@ class Credit {
         $statement->execute();
     }
 
+    public function updateCreditStatus($id) {
+        $status = 1;
+        $statement = $this->pdo->prepare('UPDATE `credit_administration` SET rent_status = :status WHERE id = :id');
+        $statement->bindParam(':status', $status);
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+    }
+
     public function getAllCreditPackages() {
         $statement = $this->pdo->prepare('SELECT * FROM `creditpackages`');
         $statement->execute();

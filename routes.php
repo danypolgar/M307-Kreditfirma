@@ -9,4 +9,5 @@ $router->define([
     'add' => 'app/Controllers/AddController.php',
     'bearbeiten' => 'app/Controllers/UpdateCreditController.php',
     'update' => 'app/Controllers/UpdateController.php',
+    'change-status' => 'app/Controllers/ChangeStatusController.php',
 ]);
