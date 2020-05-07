@@ -79,8 +79,6 @@ class Credit {
         if (!preg_match('/^[a-zA-Z]{1,50}$/', $nickname)) {
             return true;
         }
-
-
     }
 
     public function validateEmail($email) {
@@ -91,6 +89,18 @@ class Credit {
 
     public function validatePhoneNumber($phoneNumber) {
         if (!preg_match('/^[0-9\-\(\)\/\+\s]{0,15}$/', $phoneNumber)) {
+            return true;
+        }
+    }
+
+    public function validateRates($rates) {
+        if (!is_numeric($rates) && $rates >= 10 && $rates < 0) {
+            return true;
+        }
+    }
+
+    public function validateCreditPackages($creditPackages) {
+        if ($creditPackages < 0 && $creditPackages > 40) {
             return true;
         }
     }

@@ -48,7 +48,8 @@
                 </div>
             </div>
         </fieldset>
-        <input type="submit" id="button-submit" class="btn btn-primary">
+        <input type="submit" name="button-submit" class="btn btn-primary">
+        <input type="submit" name="button-cancel" class="btn btn-primary" value="Abbrechen" formnovalidate>
     </form>
 
 </div>

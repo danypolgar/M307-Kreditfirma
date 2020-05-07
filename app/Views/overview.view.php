@@ -17,11 +17,13 @@
                         <?= $credit["nickname"] ?>
                     </div>
                     <div class="col-md-1 overview-cell-status">
-                        <?php echo evaluateState($credit["rent_date"], $credit["amount_rates"]) ?>
+                        <?php echo evaluateState($credit["amount_rates"]) ?>
                     </div>
                     <div class="col-md-3 overview-cell">
-                        <?php $dateTime = Calculations::calculateDeadline($credit["rent_date"], $credit["amount_rates"]);
-                        echo $dateTime->format('Y-m-d')?>
+                        <?php $days = Calculations::calculateDays($credit["amount_rates"]);
+                        $date = new DateTime();
+                        $date = $date->format('Y-m-d');
+                        echo date('Y-m-d', strtotime($date. ' + ' .$days.' days')); ?>
                     </div>
                     <div class="col-md-4 overview-cell">
                         <?= $credit['name'] ?>

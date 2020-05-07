@@ -11,9 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $creditPackages = htmlspecialchars($_POST["credit-packages"]);
     $status = htmlspecialchars($_POST["status"]);
 
-    $creditModel->updateCredit($id, $nickname, $email, $phoneNumber, $creditPackages, $status);
-
-    header('Location: overview');
+        $creditModel->updateCredit($id, $nickname, $email, $phoneNumber, $creditPackages, $status);
+        header('Location: ./');
 
 } else {
     $errors[] = 'error has occured';
