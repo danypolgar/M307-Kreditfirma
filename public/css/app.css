@@ -110,3 +110,7 @@ fieldset {
 .notfound-404-title {
     color: #262626;
 }
+
+.btn-primary {
+    margin-top: 10px;
+}
