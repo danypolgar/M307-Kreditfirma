@@ -32,7 +32,7 @@ class Credit {
 
     public function getAllCurrentlyRunningRents()
     {
-        $statement = $this->pdo->prepare('SELECT * FROM credit_administration as credits INNER JOIN creditpackages as packages ON credits.fk_credit_pack = packages.id');
+        $statement = $this->pdo->prepare('SELECT * FROM credit_administration as credits INNER JOIN creditpackages as packages ON packages.id = credits.fk_credit_pack');
         $statement->execute();
         $results = $statement->fetchAll();
         $activeCredits = [];
@@ -42,6 +42,13 @@ class Credit {
             }
         }
         return $activeCredits;
+    }
+
+    public function getUserById($id) {
+        $statement = $this->pdo->prepare('SELECT * FROM credit_administration as credit INNER JOIN creditpackages as packages ON packages.id = credit.fk_credit_pack WHERE credit.id = :id');
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        return $statement->fetch();
     }
 
     public function updateCredit($id, $nickname, $email, $phonenumber, $fk_credit_pack, $rent_status) {

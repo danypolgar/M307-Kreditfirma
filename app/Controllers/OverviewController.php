@@ -3,6 +3,7 @@ include_once('app/Models/Credit.php');
 $creditModel = new Credit();
 $creditList = $creditModel->getAllCurrentlyRunningRents();
 
+
 function evaluateState ($date, $rates) {
     $date = calculateDeadline($date, $rates);
     $dateTime = new DateTime();
