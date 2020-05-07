@@ -1,6 +1,6 @@
 <?php
-include_once('app/Models/Credit.php');
 include('app/Controllers/Calculations.php');
+include_once('app/Models/Credit.php');
 $creditModel = new Credit();
 $creditList = $creditModel->getAllCurrentlyRunningRents();
 
@@ -15,7 +15,4 @@ function evaluateState ($rates, $rentDate) {
         return '&#9889';
     }
 }
-
-
-
 include("app/Views/overview.view.php");

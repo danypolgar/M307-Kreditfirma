@@ -1,5 +1,5 @@
 <?php
-require('app/Models/Credit.php');
+include_once('app/Models/Credit.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST["cancel"])) {

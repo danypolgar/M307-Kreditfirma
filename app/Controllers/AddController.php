@@ -12,13 +12,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: overview');
     } else {
         $nickname = htmlspecialchars(trim($_POST['name']));
-        $email = $_POST['email'];
-        $phoneNumber = $_POST['phonenumber'];
-        $rates = (int) $_POST['rates'];
-        $creditPackages = $_POST['credit-packages'];
+        $email = htmlspecialchars($_POST['email']);
+        $phoneNumber = htmlspecialchars($_POST['phonenumber']);
+        $rates = htmlspecialchars($_POST['rates']);
+        $creditPackages = htmlspecialchars($_POST['credit-packages']);
         $creditModel = new Credit();
 
-        $errorMessage = " is invalid";
+        $errorMessage = " ist invalid";
 
         if ($creditModel->validateName($nickname)) {
             $errors[] = "Nickname" . $errorMessage;

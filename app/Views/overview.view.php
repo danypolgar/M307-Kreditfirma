@@ -41,8 +41,6 @@
         </div>
         <input type="submit" class="btn btn-primary" value="Abschliessen">
     </form>
-
-    <!--        TODO: Action event handeln-->
     <form action="erfassen">
         <div class="interaction-menu">
             <input type="submit" class="btn btn-primary" value="Erfassen">
