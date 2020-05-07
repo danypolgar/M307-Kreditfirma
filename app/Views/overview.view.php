@@ -14,7 +14,7 @@
             foreach ($creditList as $credit): ?>
                 <li class="list-group-item">
                     <div class="col-md-3 overview-cell ">
-                        <?= $credit["firstname"] ?>
+                        <?= $credit["nickname"] ?>
                     </div>
                     <div class="col-md-1 overview-cell-status">
                         <?php echo evaluateState($credit["rent_date"], $credit["amount_rates"]) ?>
