@@ -13,7 +13,7 @@
         <fieldset>
             <div class="verticals">
                 <div class="form-group">
-                    <label id="label-name" for="name">Vorname*</label>
+                    <label id="label-name" for="name">Nickname*</label>
                     <input type="text" name="name" class="form-control" required>
                 </div>
                 <div class="form-group">
@@ -40,7 +40,6 @@
                 <div class="form-group">
                     <label id="label-credit-package" for="credit-packages">Kredit-Paket*</label>
                     <select class="form-control" name="credit-packages" required>
-
                         <?php foreach ($creditPackages as $package): ?>
                             <option value="<?= $package["id"] ?>"><?= $package["name"] ?></option>
                         <?php endforeach; ?>

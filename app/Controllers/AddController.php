@@ -2,7 +2,7 @@
 
 require('app/Models/Credit.php');
 require('app/Controllers/Calculations.php');
-
+include_once('app/Controllers/Calculations.php');
 
 $errors = [];
 
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $creditPackages = htmlspecialchars($_POST['credit-packages']);
         $creditModel = new Credit();
 
-        $errorMessage = " ist invalid";
+        $errorMessage = " ist ungültig.";
 
         if ($creditModel->validateName($nickname)) {
             $errors[] = "Nickname" . $errorMessage;
@@ -49,6 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
 
             $creditModel->addCredit($nickname, $email, $phoneNumber, $rates, $creditPackages);
+            $date = new DateTime();
+            $date = $date->format('Y-m-d');
+            $calculations = new Calculations();
+            $message = "Die Zahlungsfrist ist" . date('Y-m-d', strtotime($date. ' + ' .$calculations->calculateDays($rates).' days')) ;
+            echo "<script type='text/javascript'>console.log('Hallo');</script>";
             header('Location: overview');
         }
     }
