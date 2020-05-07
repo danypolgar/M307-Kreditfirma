@@ -53,7 +53,7 @@ class Credit {
             rent_status = :rent_status, 
             fk_credit_pack = :fk_credit_pack 
             WHERE id = :id');
-        $statement->bindParam(':firstname', $nickname);
+        $statement->bindParam(':nickname', $nickname);
         $statement->bindParam(':email', $email);
         $statement->bindParam(':phonenumber', $phonenumber);
         $statement->bindParam(':fk_credit_pack', $fk_credit_pack);
