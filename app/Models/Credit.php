@@ -90,7 +90,7 @@ class Credit {
     }
 
     public function validatePhoneNumber($phoneNumber) {
-        if (!preg_match('/^[0-9\-\(\)\/\+\s]{1,15}$/', $phoneNumber)) {
+        if (!preg_match('/^[0-9\-\(\)\/\+\s]{0,15}$/', $phoneNumber)) {
             return true;
         }
     }
