@@ -8,7 +8,7 @@
 <body>
 <div class="col-md-6 offset-3">
     <!--    TODO: Action und method handeln-->
-    <form action="add" method="POST">
+    <form action="add" method="POST" novalidate>
         <h1>Kredite Erfassen</h1>
         <fieldset>
             <div class="verticals">
@@ -48,8 +48,8 @@
                 </div>
             </div>
         </fieldset>
-        <input type="submit" name="button-submit" class="btn btn-primary">
-        <input type="submit" name="button-cancel" class="btn btn-primary" value="Abbrechen" formnovalidate>
+        <input type="submit" id="button-submit" class="btn btn-primary">
+        <input type="submit" id="button-cancel" name="cancel" class="btn btn-danger" value="Abbrechen">
     </form>
 
 </div>

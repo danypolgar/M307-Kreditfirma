@@ -8,34 +8,37 @@ $errors = [];
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST["cancel"])) {
+        header('Location: overview');
+    } else {
+        $nickname = htmlspecialchars(trim($_POST['name']));
+        $email = $_POST['email'];
+        $phoneNumber = $_POST['phonenumber'];
+        $rates = (int) $_POST['rates'];
+        $creditPackages = $_POST['credit-packages'];
+        $creditModel = new Credit();
 
-    $nickname = htmlspecialchars(trim($_POST['name']));
-    $email = $_POST['email'];
-    $phoneNumber = $_POST['phonenumber'];
-    $rates = (int) $_POST['rates'];
-    $creditPackages = $_POST['credit-packages'];
-    $creditModel = new Credit();
-
-    if(!$_POST['button-cancel']) {
+        $errorMessage = " is invalid";
 
         if ($creditModel->validateName($nickname)) {
-            $errors[] = $nickname;
+            $errors[] = "Nickname" . $errorMessage;
         }
 
         if ($creditModel->validateEmail($email)) {
-            $errors[] = $email;
+            $errors[] = "Email" . $errorMessage;
         }
 
+
         if ($creditModel->validatePhoneNumber($phoneNumber)) {
-            $errors[] = $phoneNumber;
+            $errors[] = "Telefonnummer" . $errorMessage;
         }
 
         if ($creditModel->validateRates($rates)) {
-            $errors[] = $rates;
+            $errors[] = "Raten" . $errorMessage;
         }
 
         if ($creditModel->validateCreditPackages($creditPackages)) {
-            $errors[] = $creditPackages;
+            $errors[] = "Kredit Packet" . $errorMessage;
         }
 
         if (count($errors) != 0) {
@@ -44,10 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "<div class='col-md-6 offset-3 alert alert-danger'>" . "$error" . "</div>";
             }
         } else {
+
             $creditModel->addCredit($nickname, $email, $phoneNumber, $rates, $creditPackages);
+            header('Location: overview');
         }
     }
-    header('Location: ./');
+
+
 } else {
     $errors[] = 'error has occured';
 }

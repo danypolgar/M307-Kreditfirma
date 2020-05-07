@@ -35,6 +35,7 @@
                 <div class="form-group">
                     <label id="label-credit-package" for="credit-packages">Kredit Packet*: <b><?= $credit["name"] ?></b></label>
                     <select class="form-control" name="credit-packages" required>
+
                         <?php foreach ($creditPackages as $package): ?>
                             <option value="<?= $package["id"] ?>"><?= $package["name"] ?></option>
                         <?php endforeach; ?>
@@ -50,8 +51,8 @@
             </div>
             <input type="hidden" id="id" name="id" value="<?= $id ?>">
         </fieldset>
-        <input type="submit" name="button-submit" class="btn btn-primary">
-        <input type="submit" name="button-cancel" class="btn btn-primary" value="Abbrechen" formnovalidate>
+        <input type="submit" id="button-submit" class="btn btn-primary">
+        <input type="submit" id="button-cancel" name="cancel" class="btn btn-danger" value="abbrechen">
     </form>
 
 </div>

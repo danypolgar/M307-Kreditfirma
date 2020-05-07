@@ -8,33 +8,39 @@
 <body>
 <div class="col-md-6 offset-3">
     <h1>Kreditliste</h1>
-    <div class="overview-container">
-        <ul class="list-group">
-            <?php
-            foreach ($creditList as $credit): ?>
-                <li class="list-group-item">
-                    <div class="col-md-3 overview-cell ">
-                        <?= $credit["nickname"] ?>
-                    </div>
-                    <div class="col-md-1 overview-cell-status">
-                        <?php echo evaluateState($credit["amount_rates"]) ?>
-                    </div>
-                    <div class="col-md-3 overview-cell">
-                        <?php $days = Calculations::calculateDays($credit["amount_rates"]);
-                        $date = new DateTime();
-                        $date = $date->format('Y-m-d');
-                        echo date('Y-m-d', strtotime($date. ' + ' .$days.' days')); ?>
-                    </div>
-                    <div class="col-md-4 overview-cell">
-                        <?= $credit['name'] ?>
-                    </div>
-                    <div class="col-md-1 overview-cell">
-                        <a href="<?= 'bearbeiten?id=' . $credit[0]?>">&#128394</a>
-                    </div>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
+    <form action="change-status" method="POST">
+        <div class="overview-container">
+            <ul class="list-group">
+                <?php
+                foreach ($creditList as $credit): ?>
+                    <li class="list-group-item">
+                        <div class="col-md-3 overview-cell ">
+                            <?= $credit["nickname"] ?>
+                        </div>
+                        <div class="col-md-1 overview-cell-status">
+                            <?php echo evaluateState($credit["amount_rates"]) ?>
+                        </div>
+                        <div class="col-md-3 overview-cell">
+                            <?php $days = Calculations::calculateDays($credit["amount_rates"]);
+                            $date = new DateTime();
+                            $date = $date->format('Y-m-d');
+                            echo date('Y-m-d', strtotime($date. ' + ' .$days.' days')); ?>
+                        </div>
+                        <div class="col-md-3 overview-cell">
+                            <?= $credit['name'] ?>
+                        </div>
+                        <div class="col-md-1 overview-cell">
+                            <a href="<?= 'bearbeiten?id=' . $credit[0] ?>">&#128394</a>
+                        </div>
+                        <div class="col-md-1 overview-cell">
+                            <input name="checklist[]" type="checkbox" value="<?= $credit[0] ?>">
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Abschliessen">
+    </form>
 
     <!--        TODO: Action event handeln-->
     <form action="erfassen">

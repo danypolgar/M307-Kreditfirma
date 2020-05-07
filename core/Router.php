@@ -29,7 +29,8 @@ class Router
         }
 
         http_response_code(404);
-        die('Keine Route für diese URI gefunden.');
+        header('Location: 404');
+
     }
 
 }
