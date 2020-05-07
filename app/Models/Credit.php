@@ -53,7 +53,7 @@ class Credit {
             rent_status = :rent_status, 
             fk_credit_pack = :fk_credit_pack 
             WHERE id = :id');
-        $statement->bindParam(':firstname', $nickname);
+        $statement->bindParam(':nickname', $nickname);
         $statement->bindParam(':email', $email);
         $statement->bindParam(':phonenumber', $phonenumber);
         $statement->bindParam(':fk_credit_pack', $fk_credit_pack);
@@ -86,7 +86,7 @@ class Credit {
     }
 
     public function validatePhoneNumber($phoneNumber) {
-        if (!preg_match('/^[0-9\-\(\)\/\+\s]{1,15}$/', $phoneNumber)) {
+        if (!preg_match('/^[0-9\-\(\)\/\+\s]{0,15}$/', $phoneNumber)) {
             return true;
         }
     }
