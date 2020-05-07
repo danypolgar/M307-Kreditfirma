@@ -80,9 +80,6 @@ class Credit {
         if (!(stripos($email, '@') && strlen($email) <= 70 && $email != '')) {
             return true;
         }
-
-
-
     }
 
     public function validatePhoneNumber($phoneNumber) {
